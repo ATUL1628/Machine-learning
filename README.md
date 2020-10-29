@@ -1,4 +1,4 @@
-# Machine-learning1
+# Churn Prediction with R
 R algorithms
 
 
