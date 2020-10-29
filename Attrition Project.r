@@ -1,6 +1,6 @@
 
-'C:/Users/AC00466058/Desktop/My R Project/Attrition Case Study.csv'
-inputData<-read.csv('C:/Users/AC00466058/Desktop/My R Project/Attrition Case Study.csv',sep=",")
+
+inputData<-read.csv('C:Desktop/My R Project/Attrition Case Study.csv',sep=",")
 inputData<-read.csv(file.choose(),sep=",")
 str(inputData)
 
