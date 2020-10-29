@@ -5,7 +5,7 @@ date: "February 19, 2019"
 output: html_document
 ---
 ```{r}
-data1<-read.csv('C:/Users/AC00466058/Desktop/My R Project/Clustering/Cluster.csv',sep=",")
+data1<-read.csv('C:/Desktop/My R Project/Clustering/Cluster.csv',sep=",")
 
 ```
 
