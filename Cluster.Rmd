@@ -1,0 +1,85 @@
+---
+title: "Clustering"
+author: "Atul Chavan"
+date: "February 19, 2019"
+output: html_document
+---
+```{r}
+data1<-read.csv('C:/Users/AC00466058/Desktop/My R Project/Clustering/Cluster.csv',sep=",")
+
+```
+
+```{r}
+dim(data1)
+str(data1)
+
+```
+
+```{r}
+library(factoextra)
+library(cluster)
+library(fpc)
+library(NbClust)
+library(clValid)
+library(magrittr)
+library(clustertend)
+```
+
+```{r}
+data = scale(data1) 
+```
+
+
+```{r}
+set.seed(123)
+hopkins(data, n = nrow(data)-1)
+```
+```{r}
+library(factoextra)
+res <- get_clust_tendency(data, n = nrow(data)-1, graph = FALSE)
+res$hopkins_stat
+```
+
+```{r}
+nb <- NbClust(data,  distance = "euclidean", min.nc=2, max.nc=15, 
+              method = "kmeans",index = "silhouette")
+nb
+```
+
+
+```{r}
+nb$All.index
+```
+```{r}
+nb$Best.nc
+```
+```{r}
+pamkClus <- pamk(data, krange = 2:15, criterion="multiasw", ns=2, critout=TRUE)
+pamkClus$nc
+cat("number of clusters estimated by optimum average silhouette width:", pamkClus$nc, "\\\\n")
+
+```
+```{r}
+wss <- (nrow(data)-1)*sum(apply(data,2,var))
+for (i in 2:15) 
+  wss[i] <- sum(kmeans(data,centers=i)$withinss)
+plot(1:15, wss, type="b", xlab="Number of Clusters",ylab="Within groups sum of squares")
+
+```
+
+```{r}
+fit <- kmeans(data,3)
+plot(data,col=fit$cluster,pch=16) 
+```
+
+```{r}
+km.res <- eclust(data, "kmeans", k = 3, nstart = 25, graph = FALSE)
+fviz_cluster(km.res, geom = "point", frame.type = "norm")
+```
+
+```{r}
+data1$clusterno<-fit$cluster
+data1
+```
+data
+
